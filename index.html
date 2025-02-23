@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photo Gallery Maker</title>
+<link rel="website icon" type="png" href="https://img.icons8.com/?size=100&id=57212&format=png&color=000000">
+<style>
+  /* Style for the gallery */
+  .gallery-box{
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 10px;
+    width:fit-content;
+    background-color: rgb(87, 74, 74);
+  }
+
+  .input-box{
+    margin:20px auto;
+    border: 1px solid;
+    padding: 20px;
+    border-radius: 10px ;
+    background-color: antiquewhite;
+  }
+
+  .input-box:hover{
+    background-color:rgb(178, 164, 146);
+  }
+  h1{
+    color: white;
+    text-align: center;
+    
+  }
+
+  .input-box input{
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .input-box button{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+  }
+
+  .input-box button:hover{
+    background-color:black;
+    color: white;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+    margin: 10px;
+  }
+
+  .gallery img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+</style>
+</head>
+<body>
+
+<div class="gallery-box">
+  <h1>Photo Gallery Maker</h1>
+  <div class="input-box">
+    <input type="file" id="image-input" accept="image/*">
+    <button onclick="addImage()">Add Image</button>
+  </div>
+  
+  <div class="gallery" id="image-gallery">
+    <!-- Images will be added dynamically here -->
+  </div>
+  
+</div>
+<script>
+function addImage() {
+  const input = document.getElementById('image-input');
+  const files = input.files;
+  
+  if (files.length === 0) {
+    alert("Plz Select the file...");
+    return;
+  }
+  
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    const imageUrl = event.target.result;
+    const gallery = document.getElementById('image-gallery');
+    const imgElement = document.createElement('img');
+    imgElement.src = imageUrl;
+    gallery.appendChild(imgElement);
+  };
+  reader.readAsDataURL(files[0]);
+}
+</script>
+
+</body>
+</html>
